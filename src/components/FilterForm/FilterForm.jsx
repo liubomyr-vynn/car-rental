@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const FilterForm = ({ carBrands, carPrices, onFilterChange }) => {
+const FilterForm = ({ carBrands, onFilterChange }) => {
+  const [selectedPrice, setSelectedPrice] = useState(''); // Додайте стан для вибраної ціни
+
   const handleFilterChange = e => {
     e.preventDefault();
     const brand = e.target.brand.value;
-    const maxPrice = parseFloat(e.target.maxPrice.value);
-    const minMileage = parseFloat(e.target.minMileage.value);
+    const maxPrice = parseFloat(selectedPrice); // Використовуйте вибрану ціну
+    const minMileage =
+      e.target.minMileage.value.trim() === ''
+        ? -Infinity
+        : parseFloat(e.target.minMileage.value);
     const maxMileage = parseFloat(e.target.maxMileage.value);
     onFilterChange({ brand, maxPrice, minMileage, maxMileage });
+  };
+
+  const handlePriceChange = e => {
+    setSelectedPrice(e.target.value); // Оновлюйте вибрану ціну при зміні вибору
   };
 
   return (
@@ -20,16 +29,15 @@ const FilterForm = ({ carBrands, carPrices, onFilterChange }) => {
           </option>
         ))}
       </select>
-      <select name="maxPrice">
-        <option value="">Виберіть максимальну ціну</option>
-        {carPrices.map(price => (
-          <option key={price} value={price}>
-            {`До ${price} дол.`}
-          </option>
-        ))}
-      </select>
       <input type="number" name="minMileage" placeholder="Пробіг від" />
       <input type="number" name="maxMileage" placeholder="Пробіг до" />
+      <input
+        type="number"
+        name="maxPrice"
+        placeholder="Максимальна ціна"
+        value={selectedPrice}
+        onChange={handlePriceChange}
+      />
       <button type="submit">Фільтрувати</button>
     </form>
   );

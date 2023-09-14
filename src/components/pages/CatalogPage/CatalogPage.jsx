@@ -11,18 +11,18 @@ const CatalogPage = () => {
   const [carPrices, setCarPrices] = useState([]);
 
   useEffect(() => {
-    // Отримати всі автомобілі з ресурсу
     axios
       .get('https://648cbfdc8620b8bae7ed56b5.mockapi.io/advert')
       .then(response => {
         const carsData = response.data;
-        // Отримати унікальні марки автомобілів
         const uniqueBrands = [...new Set(carsData.map(car => car.make))];
-        setCarBrands(uniqueBrands);
-        // Отримати унікальні ціни і заокруглити їх до десятків
+
+        // Отримайте унікальні ціни і заокругліть їх до ближчого десятка
         const uniquePrices = [
           ...new Set(carsData.map(car => Math.ceil(car.rentalPrice / 10) * 10)),
         ];
+
+        setCarBrands(uniqueBrands);
         setCarPrices(uniquePrices);
         setCars(carsData);
         setFilteredCars(carsData);
@@ -37,8 +37,10 @@ const CatalogPage = () => {
       const brandMatch =
         !brand || car.make.toLowerCase() === brand.toLowerCase();
       const priceMatch = !maxPrice || car.rentalPrice <= maxPrice;
-      const minMileageMatch = !minMileage || car.mileage >= minMileage;
-      const maxMileageMatch = !maxMileage || car.mileage <= maxMileage;
+      const minMileageMatch =
+        !minMileage || car.mileage >= parseFloat(minMileage);
+      const maxMileageMatch =
+        !maxMileage || car.mileage <= parseFloat(maxMileage);
       return brandMatch && priceMatch && minMileageMatch && maxMileageMatch;
     });
 
