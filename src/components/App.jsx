@@ -1,12 +1,12 @@
 import React from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
-// import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 
-import HomePage from './pages/HomePage/HomePage';
-import CatalogPage from './pages/CatalogPage/CatalogPage';
-import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
-import NotFound from './pages/NotFound/NotFound';
-import SharedLayout from './SharedLayout/SharedLayout';
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const CatalogPage = lazy(() => import('./pages/CatalogPage/CatalogPage'));
+const FavoritesPage = lazy(() => import('./pages/FavoritesPage/FavoritesPage'));
+const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
+const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
 
 const App = () => {
   return (
@@ -19,14 +19,16 @@ const App = () => {
         <NavLink to="/favorites"> Favorites </NavLink>
       </nav>
 
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/catalog" element={<CatalogPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </div>
   );
 };
