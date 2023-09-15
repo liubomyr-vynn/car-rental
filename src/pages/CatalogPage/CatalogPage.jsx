@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import Card from '../../Card/Card';
-import FilterForm from '../../FilterForm/FilterForm';
+import Card from '../../components/Card/Card';
+import FilterForm from '../../components/FilterForm/FilterForm';
 
 const CatalogPage = () => {
   const [cars, setCars] = useState([]);

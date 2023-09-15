@@ -1,18 +1,25 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import Navigation from './Navigation/Navigation';
 
-const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-const CatalogPage = lazy(() => import('./pages/CatalogPage/CatalogPage'));
-const FavoritesPage = lazy(() => import('./pages/FavoritesPage/FavoritesPage'));
-const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const CatalogPage = lazy(() => import('../pages/CatalogPage/CatalogPage'));
+const FavoritesPage = lazy(() =>
+  import('../pages/FavoritesPage/FavoritesPage')
+);
+const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
 
 const App = () => {
   return (
     <div>
-      <Navigation />
+      <nav>
+        <NavLink to="/" end>
+          Home
+        </NavLink>
+        <NavLink to="/catalog"> Catalog </NavLink>
+        <NavLink to="/favorites"> Favorites </NavLink>
+      </nav>
 
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
