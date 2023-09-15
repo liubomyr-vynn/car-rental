@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcar_rental=self.webpackChunkcar_rental||[]).push([[673],{673:function(e,r,a){a.r(r);var n=a(689),c=a(184);r.default=function(){return(0,c.jsxs)("div",{children:[(0,c.jsx)("header",{children:(0,c.jsxs)("div",{children:[(0,c.jsx)("span",{role:"img","aria-label":"car icon",children:"\ud83d\ude99"})," ","Car Rental"]})}),(0,c.jsx)(n.j3,{})]})}}}]);
+//# sourceMappingURL=673.5900f8ba.chunk.js.map
