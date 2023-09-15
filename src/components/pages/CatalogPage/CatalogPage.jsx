@@ -9,6 +9,9 @@ const CatalogPage = () => {
   const [filteredCars, setFilteredCars] = useState([]);
   const [carBrands, setCarBrands] = useState([]);
   const [carPrices, setCarPrices] = useState([]);
+  const [carsPerPage, setCarsPerPage] = useState(8);
+  const [loadMoreCount, setLoadMoreCount] = useState(1);
+  const [remainingCars, setRemainingCars] = useState(0);
 
   useEffect(() => {
     axios
@@ -16,8 +19,6 @@ const CatalogPage = () => {
       .then(response => {
         const carsData = response.data;
         const uniqueBrands = [...new Set(carsData.map(car => car.make))];
-
-        // Отримайте унікальні ціни і заокругліть їх до ближчого десятка
         const uniquePrices = [
           ...new Set(carsData.map(car => Math.ceil(car.rentalPrice / 10) * 10)),
         ];
@@ -25,12 +26,13 @@ const CatalogPage = () => {
         setCarBrands(uniqueBrands);
         setCarPrices(uniquePrices);
         setCars(carsData);
-        setFilteredCars(carsData);
+        setFilteredCars(carsData.slice(0, carsPerPage));
+        setRemainingCars(carsData.length - carsPerPage);
       })
       .catch(error => {
         console.error('Помилка при отриманні даних:', error);
       });
-  }, []);
+  }, [carsPerPage]);
 
   const handleFilterChange = ({ brand, maxPrice, minMileage, maxMileage }) => {
     const filtered = cars.filter(car => {
@@ -45,6 +47,28 @@ const CatalogPage = () => {
     });
 
     setFilteredCars(filtered);
+    setRemainingCars(filtered.length - carsPerPage);
+  };
+
+  const handleLoadMore = () => {
+    const nextCarsPerPage = carsPerPage + 8;
+    const loadedCars = cars.slice(
+      carsPerPage * loadMoreCount,
+      nextCarsPerPage * loadMoreCount
+    );
+
+    setCarsPerPage(nextCarsPerPage);
+
+    if (remainingCars - loadedCars.length > 0) {
+      setFilteredCars(prevFilteredCars => [...prevFilteredCars, ...loadedCars]);
+      setLoadMoreCount(prevCount => prevCount + 1);
+    } else {
+      setFilteredCars(prevFilteredCars => [
+        ...prevFilteredCars,
+        ...loadedCars.slice(0, remainingCars),
+      ]);
+      setRemainingCars(0);
+    }
   };
 
   return (
@@ -61,7 +85,9 @@ const CatalogPage = () => {
           </li>
         ))}
       </ul>
+      {remainingCars > 0 && <button onClick={handleLoadMore}>Load more</button>}
     </div>
   );
 };
+
 export default CatalogPage;
