@@ -8,7 +8,7 @@ const FavoritesPage = lazy(() =>
   import('../pages/FavoritesPage/FavoritesPage')
 );
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
-const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
+const SharedLayout = lazy(() => import('./Layout/Layout'));
 
 const App = () => {
   return (
