@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 const FilterForm = ({ carBrands, onFilterChange }) => {
-  const [selectedPrice, setSelectedPrice] = useState(''); // Додайте стан для вибраної ціни
+  const [selectedPrice, setSelectedPrice] = useState('');
 
   const handleFilterChange = e => {
     e.preventDefault();
     const brand = e.target.brand.value;
-    const maxPrice = parseFloat(selectedPrice); // Використовуйте вибрану ціну
+    const maxPrice = parseFloat(selectedPrice);
     const minMileage =
       e.target.minMileage.value.trim() === ''
         ? -Infinity
@@ -16,29 +16,31 @@ const FilterForm = ({ carBrands, onFilterChange }) => {
   };
 
   const handlePriceChange = e => {
-    setSelectedPrice(e.target.value); // Оновлюйте вибрану ціну при зміні вибору
+    setSelectedPrice(e.target.value);
   };
 
   return (
     <form onSubmit={handleFilterChange}>
       <select name="brand">
-        <option value="">Виберіть марку автомобіля</option>
+        <option value="">Enter the text</option>
         {carBrands.map(brand => (
           <option key={brand} value={brand}>
             {brand}
           </option>
         ))}
       </select>
-      <input type="number" name="minMileage" placeholder="Пробіг від" />
-      <input type="number" name="maxMileage" placeholder="Пробіг до" />
       <input
         type="number"
         name="maxPrice"
-        placeholder="Максимальна ціна"
+        placeholder="To $"
         value={selectedPrice}
         onChange={handlePriceChange}
       />
-      <button type="submit">Фільтрувати</button>
+      <label>Сar mileage / km</label>
+      <input type="number" name="minMileage" placeholder="From" />
+      <input type="number" name="maxMileage" placeholder="To" />
+
+      <button type="submit">Search</button>
     </form>
   );
 };
