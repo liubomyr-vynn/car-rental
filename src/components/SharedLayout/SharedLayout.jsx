@@ -4,7 +4,6 @@ const SharedLayout = () => {
   return (
     <div>
       <header>
-        {' '}
         <div>
           <span role="img" aria-label="car icon">
             🚙

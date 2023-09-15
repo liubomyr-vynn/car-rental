@@ -1,6 +1,7 @@
 import React from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import Navigation from './Navigation/Navigation';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage/CatalogPage'));
@@ -11,13 +12,7 @@ const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
 const App = () => {
   return (
     <div>
-      <nav>
-        <NavLink to="/" end>
-          Home
-        </NavLink>
-        <NavLink to="/catalog"> Catalog </NavLink>
-        <NavLink to="/favorites"> Favorites </NavLink>
-      </nav>
+      <Navigation />
 
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
