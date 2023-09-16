@@ -1,5 +1,11 @@
+import Container from 'components/Container/Container';
+
 const NotFound = () => {
-  return <>NotFound </>;
+  return (
+    <>
+      <Container>NotFound </Container>
+    </>
+  );
 };
 
 export default NotFound;
