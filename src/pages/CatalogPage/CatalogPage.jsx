@@ -3,6 +3,9 @@ import axios from 'axios';
 
 import Card from '../../components/Card/Card';
 import FilterForm from '../../components/FilterForm/FilterForm';
+import Container from 'components/Container/Container';
+import { CardContainer, LoadMoreContainer } from './CatalogPage.styled';
+// import { Wrapper } from './CatalogPage.styled';
 
 const CatalogPage = () => {
   const [cars, setCars] = useState([]);
@@ -73,19 +76,25 @@ const CatalogPage = () => {
 
   return (
     <div>
-      <FilterForm
-        carBrands={carBrands}
-        carPrices={carPrices}
-        onFilterChange={handleFilterChange}
-      />
-      <ul>
-        {filteredCars.map(car => (
-          <li key={car.id}>
-            <Card car={car} />
-          </li>
-        ))}
-      </ul>
-      {remainingCars > 0 && <button onClick={handleLoadMore}>Load more</button>}
+      <Container>
+        <FilterForm
+          carBrands={carBrands}
+          carPrices={carPrices}
+          onFilterChange={handleFilterChange}
+        />
+        <CardContainer>
+          {filteredCars.map(car => (
+            <div key={car.id}>
+              <Card car={car} />
+            </div>
+          ))}
+        </CardContainer>
+        {remainingCars > 0 && (
+          <LoadMoreContainer>
+            <button onClick={handleLoadMore}>Load more</button>
+          </LoadMoreContainer>
+        )}
+      </Container>
     </div>
   );
 };
