@@ -1,14 +1,15 @@
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
+import { StyledNav, StyledNavLink } from './Navigation.styled';
 
 const Navigation = () => {
   return (
-    <nav>
-      <NavLink to="/" end>
+    <StyledNav>
+      <StyledNavLink to="/" end>
         Home
-      </NavLink>
-      <NavLink to="/catalog"> Catalog </NavLink>
-      <NavLink to="/favorites"> Favorites </NavLink>
-    </nav>
+      </StyledNavLink>
+      <StyledNavLink to="/catalog"> Catalog </StyledNavLink>
+      <StyledNavLink to="/favorites"> Favorites </StyledNavLink>
+    </StyledNav>
   );
 };
 
