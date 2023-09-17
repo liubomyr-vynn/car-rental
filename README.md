@@ -42,4 +42,4 @@ npm start
 
 ## Contributing
 
-We welcome contributions from the community. If you'd like to contribute to the development of the Car Rental App, please follow our [Contributing Guidelines](CONTRIBUTING.md).
+We welcome contributions from the community. If you'd like to contribute to the development of the Car Rental App, please follow us.
