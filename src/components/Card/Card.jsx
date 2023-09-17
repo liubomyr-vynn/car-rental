@@ -4,6 +4,8 @@ import {
   CarImgWrap,
   CarInfo,
   CarText,
+  HeartIcon,
+  HeartIconBlue,
   IconBtn,
   InfoWrapper,
   Item,
@@ -14,7 +16,7 @@ import {
   SecondaryInfo,
 } from './Card.styled';
 
-import Modal from 'components/Modal/Modal'; // Переконайтеся, що Modal імпортується вірно
+import Modal from 'components/Modal/Modal';
 
 const Card = ({ car }) => {
   const addressParts = car.address.split(', ');
@@ -24,6 +26,7 @@ const Card = ({ car }) => {
   const firstFunctionality = car.functionalities[0];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -33,15 +36,16 @@ const Card = ({ car }) => {
     setIsModalOpen(false);
   };
 
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <Item>
       <CarImgWrap>
         <CarImg src={car.img} alt={car.make} />
-        <IconBtn
-          onClick={openModal} // Відкрити модальне вікно при кліку на іконку
-          type="button"
-        >
-          {/* Додайте іконку серця або іншу іконку */}
+        <IconBtn onClick={toggleFavorite} type="button">
+          {isFavorite ? <HeartIconBlue /> : <HeartIcon />}
         </IconBtn>
       </CarImgWrap>
       <InfoWrapper>
@@ -64,11 +68,7 @@ const Card = ({ car }) => {
           <SecondaryCarText>{car.id}</SecondaryCarText>
           <SecondaryCarText>{firstFunctionality}</SecondaryCarText>
         </SecondaryInfo>
-        <LearnMoreBtn
-          onClick={openModal} // Відкрити модальне вікно при кліку на "Learn more"
-        >
-          Learn more
-        </LearnMoreBtn>
+        <LearnMoreBtn onClick={openModal}>Learn more</LearnMoreBtn>
       </InfoWrapper>
 
       {isModalOpen && (

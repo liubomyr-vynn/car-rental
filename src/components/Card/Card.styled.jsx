@@ -21,6 +21,7 @@ export const CarImg = styled.img`
   width: 274px;
   height: 268px;
   border-radius: 14px;
+  object-fit: cover;
 `;
 
 export const InfoWrapper = styled.div`
