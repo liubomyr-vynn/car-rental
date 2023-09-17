@@ -11,6 +11,7 @@ export const Backdrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1200;
 `;
 
 export const ModalContainer = styled.div`
@@ -22,7 +23,7 @@ export const ModalContainer = styled.div`
   border-radius: 24px;
   padding: 15px;
   max-width: 320px;
-  z-index: 100;
+  z-index: 1200;
   overflow-y: auto;
   max-height: 80vh;
 
@@ -31,19 +32,19 @@ export const ModalContainer = styled.div`
   @media (min-width: 768px) {
     padding: 30px;
     max-width: 100%;
-    max-height: 600px;
+    max-height: 500px;
     overflow-y: scroll;
-    top: 40%;
+    top: 50%;
   }
   @media (max-width: 1080px) {
-    top: 50%;
+    top: 55%;
     padding: 30px;
     max-width: 100%;
-    height: 600px;
+    height: 500px;
     overflow-y: scroll;
   }
   @media (min-width: 1440px) {
-    top: 50%;
+    top: 52%;
     padding: 40px;
     overflow-y: hidden;
     max-width: 100%;
