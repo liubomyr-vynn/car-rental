@@ -19,4 +19,27 @@ Our app offers a user-friendly interface with intuitive navigation, providing ac
 To get started with our Car Rental App:
 
 1. **Clone the Repository**: Clone this repository to your local machine using the following command:
+   
+git clone https://github.com/liubomyr-vynn/car-rental.git
 
+2. **Installation**: Navigate to the project directory and install the required dependencies by running:
+
+npm install
+
+3. **Running the App**: Start the development server by running:
+
+npm start
+
+4. **Access the App**: Open your web browser and go to `http://localhost:3000` to access the app.
+
+## Technologies Used
+
+- **React**: We've built this app using the React library for efficient and responsive user interfaces.
+
+- **React Router**: React Router handles the routing between different sections of our app, providing a seamless navigation experience.
+
+- **Styled Components**: Styled Components are used for styling our app components, ensuring a clean and maintainable codebase.
+
+## Contributing
+
+We welcome contributions from the community. If you'd like to contribute to the development of the Car Rental App, please follow our [Contributing Guidelines](CONTRIBUTING.md).
