@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
 import Card from '../../components/Card/Card';
 import FilterForm from '../../components/FilterForm/FilterForm';
 import Container from 'components/Container/Container';
 import { CardContainer, LoadMoreContainer } from './CatalogPage.styled';
-// import { Wrapper } from './CatalogPage.styled';
 
 const CatalogPage = () => {
   const [cars, setCars] = useState([]);
@@ -15,6 +13,7 @@ const CatalogPage = () => {
   const [carsPerPage, setCarsPerPage] = useState(8);
   const [loadMoreCount, setLoadMoreCount] = useState(1);
   const [remainingCars, setRemainingCars] = useState(0);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     axios
@@ -36,6 +35,22 @@ const CatalogPage = () => {
         console.error('Помилка при отриманні даних:', error);
       });
   }, [carsPerPage]);
+
+  useEffect(() => {
+    const favorites = localStorage.getItem('favorites');
+    if (favorites) {
+      setFavorites(JSON.parse(favorites));
+    }
+  }, []);
+
+  const updateFavorites = (carId, isFavorite) => {
+    const updatedFavorites = isFavorite
+      ? [...favorites, carId]
+      : favorites.filter(id => id !== carId);
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
 
   const handleFilterChange = ({ brand, maxPrice, minMileage, maxMileage }) => {
     const filtered = cars.filter(car => {
@@ -85,7 +100,11 @@ const CatalogPage = () => {
         <CardContainer>
           {filteredCars.map(car => (
             <div key={car.id}>
-              <Card car={car} />
+              <Card
+                car={car}
+                isFavoriteProp={favorites.includes(car.id)}
+                updateFavorites={updateFavorites}
+              />
             </div>
           ))}
         </CardContainer>

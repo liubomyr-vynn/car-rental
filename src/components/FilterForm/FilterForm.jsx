@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FilterContainer } from './FilterForm.styled';
 
 const FilterForm = ({ carBrands, onFilterChange }) => {
   const [selectedPrice, setSelectedPrice] = useState('');
@@ -20,28 +21,30 @@ const FilterForm = ({ carBrands, onFilterChange }) => {
   };
 
   return (
-    <form onSubmit={handleFilterChange}>
-      <select name="brand">
-        <option value="">Enter the text</option>
-        {carBrands.map(brand => (
-          <option key={brand} value={brand}>
-            {brand}
-          </option>
-        ))}
-      </select>
-      <input
-        type="number"
-        name="maxPrice"
-        placeholder="To $"
-        value={selectedPrice}
-        onChange={handlePriceChange}
-      />
-      <label>Сar mileage / km</label>
-      <input type="number" name="minMileage" placeholder="From" />
-      <input type="number" name="maxMileage" placeholder="To" />
+    <FilterContainer>
+      <form onSubmit={handleFilterChange}>
+        <select name="brand">
+          <option value="">Enter the text</option>
+          {carBrands.map(brand => (
+            <option key={brand} value={brand}>
+              {brand}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          name="maxPrice"
+          placeholder="To $"
+          value={selectedPrice}
+          onChange={handlePriceChange}
+        />
+        <label>Сar mileage / km</label>
+        <input type="number" name="minMileage" placeholder="From" />
+        <input type="number" name="maxMileage" placeholder="To" />
 
-      <button type="submit">Search</button>
-    </form>
+        <button type="submit">Search</button>
+      </form>
+    </FilterContainer>
   );
 };
 

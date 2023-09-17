@@ -18,7 +18,7 @@ import {
 
 import Modal from 'components/Modal/Modal';
 
-const Card = ({ car }) => {
+const Card = ({ car, isFavoriteProp, updateFavorites }) => {
   const addressParts = car.address.split(', ');
   const city = addressParts[1];
   const country = addressParts[2];
@@ -26,7 +26,7 @@ const Card = ({ car }) => {
   const firstFunctionality = car.functionalities[0];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(isFavoriteProp);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -38,6 +38,7 @@ const Card = ({ car }) => {
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
+    updateFavorites(car.id, !isFavorite);
   };
 
   return (
