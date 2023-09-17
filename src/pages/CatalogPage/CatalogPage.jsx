@@ -3,7 +3,11 @@ import axios from 'axios';
 import Card from '../../components/Card/Card';
 import FilterForm from '../../components/FilterForm/FilterForm';
 import Container from 'components/Container/Container';
-import { CardContainer, LoadMoreContainer } from './CatalogPage.styled';
+import {
+  CardContainer,
+  LoadMoreBtn,
+  LoadMoreContainer,
+} from './CatalogPage.styled';
 
 const CatalogPage = () => {
   const [cars, setCars] = useState([]);
@@ -110,7 +114,7 @@ const CatalogPage = () => {
         </CardContainer>
         {remainingCars > 0 && (
           <LoadMoreContainer>
-            <button onClick={handleLoadMore}>Load more</button>
+            <LoadMoreBtn onClick={handleLoadMore}>Load more</LoadMoreBtn>
           </LoadMoreContainer>
         )}
       </Container>
