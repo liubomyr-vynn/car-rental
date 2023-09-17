@@ -1,4 +1,4 @@
-// import { NavLink } from 'react-router-dom';
+
 import styled from '@emotion/styled';
 
 export const AppBar = styled.header`
@@ -7,8 +7,7 @@ export const AppBar = styled.header`
   position: sticky;
   z-index: 1100;
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
+
   min-height: 40px;
 
   padding-top: 10px;

@@ -1,4 +1,3 @@
-// import { NavLink } from 'react-router-dom';
 import { StyledNav, StyledNavLink } from './Navigation.styled';
 
 const Navigation = () => {

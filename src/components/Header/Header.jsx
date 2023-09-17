@@ -10,12 +10,6 @@ const Header = () => {
       <Container>
         {' '}
         <HeaderList>
-          {/* <div>
-            <span role="img" aria-label="car icon">
-              🚙
-            </span>{' '}
-            Car Rental
-          </div> */}
           <div>
             <Navigation />
           </div>

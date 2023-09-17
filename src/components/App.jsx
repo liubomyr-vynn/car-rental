@@ -13,15 +13,6 @@ const SharedLayout = lazy(() => import('./Layout/Layout'));
 const App = () => {
   return (
     <div>
-      {/* <nav>
-        <NavLink to="/" end>
-          Home
-        </NavLink>
-        <NavLink to="/catalog"> Catalog </NavLink>
-        <NavLink to="/favorites"> Favorites </NavLink>
-      </nav> */}
-
-      {/* <Suspense fallback={<div>Loading...</div>}> */}
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage />} />
@@ -30,7 +21,6 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-      {/* </Suspense> */}
     </div>
   );
 };

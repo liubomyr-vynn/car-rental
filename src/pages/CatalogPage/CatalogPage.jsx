@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '../../components/Card/Card';
-import FilterForm from '../../components/FilterForm/FilterForm';
 import Container from 'components/Container/Container';
 import {
   CardContainer,
@@ -12,8 +11,7 @@ import {
 const CatalogPage = () => {
   const [cars, setCars] = useState([]);
   const [filteredCars, setFilteredCars] = useState([]);
-  const [carBrands, setCarBrands] = useState([]);
-  const [carPrices, setCarPrices] = useState([]);
+
   const [carsPerPage, setCarsPerPage] = useState(8);
   const [loadMoreCount, setLoadMoreCount] = useState(1);
   const [remainingCars, setRemainingCars] = useState(0);
@@ -24,13 +22,7 @@ const CatalogPage = () => {
       .get('https://648cbfdc8620b8bae7ed56b5.mockapi.io/advert')
       .then(response => {
         const carsData = response.data;
-        const uniqueBrands = [...new Set(carsData.map(car => car.make))];
-        const uniquePrices = [
-          ...new Set(carsData.map(car => Math.ceil(car.rentalPrice / 10) * 10)),
-        ];
 
-        setCarBrands(uniqueBrands);
-        setCarPrices(uniquePrices);
         setCars(carsData);
         setFilteredCars(carsData.slice(0, carsPerPage));
         setRemainingCars(carsData.length - carsPerPage);
@@ -54,22 +46,6 @@ const CatalogPage = () => {
 
     setFavorites(updatedFavorites);
     localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  };
-
-  const handleFilterChange = ({ brand, maxPrice, minMileage, maxMileage }) => {
-    const filtered = cars.filter(car => {
-      const brandMatch =
-        !brand || car.make.toLowerCase() === brand.toLowerCase();
-      const priceMatch = !maxPrice || car.rentalPrice <= maxPrice;
-      const minMileageMatch =
-        !minMileage || car.mileage >= parseFloat(minMileage);
-      const maxMileageMatch =
-        !maxMileage || car.mileage <= parseFloat(maxMileage);
-      return brandMatch && priceMatch && minMileageMatch && maxMileageMatch;
-    });
-
-    setFilteredCars(filtered);
-    setRemainingCars(filtered.length - carsPerPage);
   };
 
   const handleLoadMore = () => {
@@ -96,11 +72,6 @@ const CatalogPage = () => {
   return (
     <div>
       <Container>
-        <FilterForm
-          carBrands={carBrands}
-          carPrices={carPrices}
-          onFilterChange={handleFilterChange}
-        />
         <CardContainer>
           {filteredCars.map(car => (
             <div key={car.id}>
